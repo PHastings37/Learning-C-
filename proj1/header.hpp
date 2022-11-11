@@ -12,6 +12,11 @@ class Input_validation {
         double lower{};
         std::string error{};
 
+        void clear_input(){
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        }
+
     public:
         Input_validation() = default;
 
@@ -49,11 +54,25 @@ class Input_validation {
             return input;
         }   
 
-        
+        template <class T> T limit_check(){
+            bool limit_check{false};
+            T input;
 
-        void clear_input(){
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+            while(!limit_check){
+                if (input<lower || input>upper){
+                    clear_input();
+                    std::cout<<error;
+                    std::cin>>input;
+                } else{
+                    break;
+                }
+            }
+        return input;
+        }
+
+        template<class T> T get_input(){
+            T input;
+            return input;
         }
             
             
