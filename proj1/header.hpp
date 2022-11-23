@@ -32,8 +32,8 @@ class Input_validation {
         template <class T> T type_check(){
             bool type_check{false};
             T input;
-            T input_T = input;
-            T input_double = input;
+            T input_T = static_cast<T>(input);
+            T input_double = static_cast<T>(input);
 
             std::cout<<error;
             std::cin>>input;
@@ -54,9 +54,8 @@ class Input_validation {
             return input;
         }   
 
-        template <class T> T limit_check(){
+        template <class T> T limit_check(T input){
             bool limit_check{false};
-            T input;
 
             while(!limit_check){
                 if (input<lower || input>upper){
@@ -69,13 +68,6 @@ class Input_validation {
             }
         return input;
         }
-
-        template<class T> T get_input(){
-            T input;
-            return input;
-        }
-            
-            
-        };
+};
 
 #endif
