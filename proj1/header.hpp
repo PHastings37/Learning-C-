@@ -17,6 +17,17 @@ class Input_validation {
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         }
 
+        bool is_int(std::string str){
+            for (int i=0; i<str.length(); i++){
+                if (!isdigit(str[i])){
+                    return false;
+                }else{
+                    continue;
+                }
+            }
+            return true;
+        }
+
     public:
         Input_validation() = default;
 
@@ -29,32 +40,27 @@ class Input_validation {
         {}
 
 
-        template <class T> T type_check(){
+        int type_check(){
             bool type_check{false};
-            T input;
-            T input_T = static_cast<T>(input);
-            T input_double = static_cast<T>(input);
+            int input;
+            std::string input_string;
 
-            std::cout<<error;
-            std::cin>>input;
-            
             while(!type_check){
-                if (std::cin.fail()){
+                std::cout<<error;
+                std::cin>>input_string;
+
+                if (!is_int(input_string)){
                     clear_input();
-                    std::cout<<error;
-                    std::cin>>input;
-                } else if (static_cast<T>(input_T) != static_cast<double>(input_double)){
-                    clear_input();
-                    std::cout<<error;
-                    std::cin>>input;
-                } else{
-                    break;
-                }   
+                }
+                else{
+                    type_check = true;
+                }    
             }
+            input = stoi(input_string);
             return input;
         }   
 
-        template <class T> T limit_check(T input){
+        int limit_check(int input){
             bool limit_check{false};
 
             while(!limit_check){
